@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
+    "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./public/index.html"
   ],
   theme: {
     extend: {
@@ -38,11 +38,6 @@ module.exports = {
       },
       screens: {
         'xs': '475px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
-        '2xl': '1536px',
       },
       spacing: {
         '18': '4.5rem',
@@ -82,10 +77,6 @@ module.exports = {
           '100%': { transform: 'scale(1)', opacity: '1' },
         },
       },
-      transitionProperty: {
-        'height': 'height',
-        'spacing': 'margin, padding',
-      },
       zIndex: {
         '60': '60',
         '70': '70',
@@ -95,76 +86,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms')({
-      strategy: 'class',
-    }),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-    // Custom plugin for utilities
-    function ({ addUtilities }) {
-      const newUtilities = {
-        '.line-clamp-1': {
-          overflow: 'hidden',
-          display: '-webkit-box',
-          '-webkit-box-orient': 'vertical',
-          '-webkit-line-clamp': '1',
-        },
-        '.line-clamp-2': {
-          overflow: 'hidden',
-          display: '-webkit-box',
-          '-webkit-box-orient': 'vertical',
-          '-webkit-line-clamp': '2',
-        },
-        '.line-clamp-3': {
-          overflow: 'hidden',
-          display: '-webkit-box',
-          '-webkit-box-orient': 'vertical',
-          '-webkit-line-clamp': '3',
-        },
-        '.scrollbar-hide': {
-          '-ms-overflow-style': 'none',
-          'scrollbar-width': 'none',
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        },
-        '.scrollbar-thin': {
-          'scrollbar-width': 'thin',
-          'scrollbar-color': '#CBD5E0 #EDF2F7',
-        },
-        '.scrollbar-thin::-webkit-scrollbar': {
-          width: '8px',
-        },
-        '.scrollbar-thin::-webkit-scrollbar-track': {
-          background: '#EDF2F7',
-        },
-        '.scrollbar-thin::-webkit-scrollbar-thumb': {
-          background: '#CBD5E0',
-          'border-radius': '4px',
-        },
-        '.scrollbar-thin::-webkit-scrollbar-thumb:hover': {
-          background: '#A0AEC0',
-        },
-      }
-      addUtilities(newUtilities)
-    }
-  ],
-  // Dark mode configuration
   darkMode: 'class',
-  // Safelist for dynamic classes
-  safelist: [
-    'animate-spin',
-    'animate-pulse',
-    'animate-bounce',
-    {
-      pattern: /bg-(red|green|blue|yellow|purple|pink|indigo)-(100|200|300|400|500|600|700|800|900)/,
-    },
-    {
-      pattern: /text-(red|green|blue|yellow|purple|pink|indigo)-(100|200|300|400|500|600|700|800|900)/,
-    },
-    {
-      pattern: /border-(red|green|blue|yellow|purple|pink|indigo)-(100|200|300|400|500|600|700|800|900)/,
-    },
-  ],
 }
