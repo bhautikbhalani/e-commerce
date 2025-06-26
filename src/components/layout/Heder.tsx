@@ -3,8 +3,8 @@ const Header = () => {
     <>
       <div className="w-full bg-gray-900 text-white text-center py-2 text-xs md:text-sm">
         Get 25% OFF on your first order.{" "}
-        <span className="font-semibold">
-          Order <span className="underline">Now</span>
+        <span className="font-semibold underline cursor-pointer">
+          Order Now
         </span>
       </div>
       <header className="w-full bg-white shadow-sm sticky top-0 z-1000">

@@ -1,11 +1,7 @@
-import HomePage from './components/layout/HomePage';
+import ProductListing from "./pages/product/productListing";
 
 const App = () => {
-  
-
-  return (
-    <HomePage />
-  );
+  return <ProductListing />;
 };
 
 export default App;

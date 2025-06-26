@@ -11,7 +11,7 @@ export const useProducts = () => {
     const [sortBy, setSortBy] = useState<string>('name');
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const productsPerPage = 8;
+    const productsPerPage = 9;
 
     useEffect(() => {
         const fetchData = async () => {

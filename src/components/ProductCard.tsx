@@ -1,33 +1,64 @@
-import React from 'react';
-import StarRating from './StarRating';
-import type { ProductCardProps } from '../utils/types';
+import React, { useEffect } from "react";
+import type { ProductCardProps } from "../utils/types";
 
+const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  onViewDetails,
+}) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      onViewDetails(product);
+    }
+  };
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onViewDetails }) => {
-    return (
-        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-            <div className="aspect-square overflow-hidden bg-gray-100">
-                <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
-                />
-            </div>
-            <div className="p-4">
-                <h3 className="font-semibold text-gray-800 line-clamp-2 mb-2">{product.title}</h3>
-                <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl font-bold text-blue-600">${product.price}</span>
-                    <StarRating rating={product.rating.rate} count={product.rating.count} />
-                </div>
-                <button
-                    onClick={() => onViewDetails(product)}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200"
-                >
-                    View Details
-                </button>
-            </div>
+  useEffect(() => {
+    document.title = "Shop Products | Your Store Name";
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        "Browse our wide selection of products. Find the best deals on fashion, electronics, and more."
+      );
+    } else {
+      const meta = document.createElement("meta");
+      meta.name = "description";
+      meta.content =
+        "Browse our wide selection of products. Find the best deals on fashion, electronics, and more.";
+      document.head.appendChild(meta);
+    }
+  }, []);
+
+  return (
+    <button
+      type="button"
+      aria-label={`View details for ${product.title}`}
+      className="bg-white rounded-md shadow flex flex-col items-stretch cursor-pointer hover:shadow-lg transition-shadow duration-300 h-100 focus:outline-none focus:ring-2 focus:ring-primary-400 w-full text-left p-0 border-0"
+      onClick={() => onViewDetails(product)}
+      onKeyDown={handleKeyDown}
+    >
+      <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-t-md m-0">
+        <img
+          src={product.image}
+          alt={product.title}
+          className="w-40 h-40 object-contain"
+        />
+      </div>
+      <div className="px-6 py-4">
+        <div
+          className="font-medium text-center truncate w-full min-h-[1.5rem] mb-4"
+          title={product.title}
+        >
+          {product.title}
         </div>
-    );
+        <div className="flex items-center gap-3 justify-center">
+          <div className="text-xs text-gray-700 border border-gray-400 rounded-full px-3 py-1">
+            IN STOCK
+          </div>
+          <div className="text-gray-700 font-semibold">${product.price}</div>
+        </div>
+      </div>
+    </button>
+  );
 };
 
 export default ProductCard;
