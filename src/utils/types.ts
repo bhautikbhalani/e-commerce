@@ -58,5 +58,4 @@ export interface StarRatingProps {
 
 export interface ProductCardProps {
     product: Product;
-    onViewDetails: (product: Product) => void;
 }
