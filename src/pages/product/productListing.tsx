@@ -134,7 +134,7 @@ const ProductListing: React.FC = () => {
             onCategoryChange={setSelectedCategories}
             priceRange={priceRange}
             onPriceRangeChange={setPriceRange}
-            isOpen={sidebarOpen || window.innerWidth >= 1024}
+            isOpen={sidebarOpen ?? window.innerWidth >= 1024}
             onClose={() => setSidebarOpen(false)}
           />
         </div>

@@ -7,7 +7,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
 }) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter" || e.key === " ") {
-      onViewDetails(product);
+      onViewDetails?.(product);
     }
   };
 
@@ -33,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       type="button"
       aria-label={`View details for ${product.title}`}
       className="bg-white rounded-md shadow flex flex-col items-stretch cursor-pointer hover:shadow-lg transition-shadow duration-300 h-100 focus:outline-none focus:ring-2 focus:ring-primary-400 w-full text-left p-0 border-0"
-      onClick={() => onViewDetails(product)}
+      onClick={() => onViewDetails?.(product)}
       onKeyDown={handleKeyDown}
     >
       <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-t-md m-0">

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useProducts } from "../../hooks/useProducts";
-import ProductCard from "../ProductCard";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import { useProducts } from "../../../hooks/useProducts";
+import ProductCard from "../../../components/ProductCard";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Autoplay } from "swiper/modules";
 import "swiper/css/autoplay";
 
 const FeaturedProducts = () => {
