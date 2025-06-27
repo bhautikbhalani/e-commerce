@@ -16,7 +16,7 @@ const FashionParadise = () => {
         </div>
         <div className="flex-1 flex justify-center">
           <img
-            src="https://i.imgur.com/poncho.png"
+            src="/public/fashionparadise.png"
             alt="Fashion Paradise"
             className="w-48 h-48 object-contain"
           />
