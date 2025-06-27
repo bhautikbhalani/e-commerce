@@ -66,9 +66,7 @@ const ProductListing: React.FC = () => {
   let productGridContent;
   if (loading) {
     productGridContent = (
-      <div className="flex justify-center items-center h-64">
-        Loading...
-      </div>
+      <div className="flex justify-center items-center h-64">Loading...</div>
     );
   } else if (error) {
     productGridContent = (
