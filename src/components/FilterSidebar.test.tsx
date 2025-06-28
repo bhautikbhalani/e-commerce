@@ -5,7 +5,7 @@ import FilterSidebar from "./FilterSidebar";
 describe("FilterSidebar", () => {
   const mockProps = {
     categories: ["Electronics", "Clothing", "Books"],
-    selectedCategory: "",
+    selectedCategories: [],
     onCategoryChange: vi.fn(),
     priceRange: { min: 0, max: 1000 },
     onPriceRangeChange: vi.fn(),
@@ -46,7 +46,14 @@ describe("FilterSidebar", () => {
     render(<FilterSidebar {...mockProps} />);
     const categoryOption = screen.getByLabelText("Electronics");
     fireEvent.click(categoryOption);
-    expect(mockProps.onCategoryChange).toHaveBeenCalledWith("Electronics");
+    expect(mockProps.onCategoryChange).toHaveBeenCalledWith(["Electronics"]);
+  });
+
+  it("calls onCategoryChange when category is deselected", () => {
+    render(<FilterSidebar {...mockProps} selectedCategories={["Electronics"]} />);
+    const categoryOption = screen.getByLabelText("Electronics");
+    fireEvent.click(categoryOption);
+    expect(mockProps.onCategoryChange).toHaveBeenCalledWith([]);
   });
 
   it("calls onPriceRangeChange when min range is changed", () => {

@@ -22,7 +22,7 @@ const Header = () => {
           Order Now
         </span>
       </div>
-      <header className="w-full bg-white shadow-sm sticky top-0 z-1000">
+      <header className="w-full bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4 md:px-8">
           <div className="flex items-center gap-2">
             <div className="bg-black rounded-full w-8 h-8 flex items-center justify-center text-white font-bold text-lg">
@@ -118,7 +118,10 @@ const Header = () => {
           </div>
         </div>
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-end md:hidden">
+          <div
+            className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-end md:hidden"
+            style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+          >
             <div className="bg-white w-64 h-full shadow-lg flex flex-col p-6 relative animate-slide-in">
               <button
                 className="absolute top-4 right-4 text-2xl cursor-pointer"

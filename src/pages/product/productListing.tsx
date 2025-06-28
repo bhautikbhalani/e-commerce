@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/layout/Heder";
 import Footer from "../../components/layout/Footer";
 import Newsletter from "../home/components/Newsletter";
@@ -7,6 +7,7 @@ import ProductCard from "../../components/ProductCard";
 import Pagination from "../../components/Pagination";
 import { useProducts } from "../../hooks/useProducts";
 import { Link } from "react-router-dom";
+import { Funnel } from "lucide-react";
 
 const ProductListing: React.FC = () => {
   const {
@@ -25,6 +26,26 @@ const ProductListing: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle responsive behavior
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Close sidebar when switching from mobile to desktop
+  useEffect(() => {
+    if (!isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [isMobile]);
 
   const productsPerPage = 9;
   const filteredProducts = allProducts.filter((product) => {
@@ -98,27 +119,44 @@ const ProductListing: React.FC = () => {
         </div>
       </div>
       <main className="flex-1 w-full max-w-7xl mx-auto px-2 md:px-8 py-8 flex flex-col lg:flex-row gap-8">
-        <div className="lg:w-64 w-full lg:static fixed z-50 top-0 left-0 h-full lg:h-auto">
-          <button
-            className="lg:hidden mb-4 px-4 py-2 bg-gray-200 rounded text-gray-700 cursor-pointer"
-            onClick={() => setSidebarOpen(true)}
-          >
-            Filters
-          </button>
+        <div className="w-full top-0 left-0 h-full z-50 lg:static lg:w-64 lg:h-auto lg:z-auto">
           <FilterSidebar
             categories={categories}
-            selectedCategory={selectedCategories[0] || ''}
-            onCategoryChange={(category) => setSelectedCategories([category])}
+            selectedCategories={selectedCategories}
+            onCategoryChange={setSelectedCategories}
             priceRange={priceRange}
             onPriceRangeChange={setPriceRange}
             selectedSort={sortBy}
             onSortChange={setSortBy}
-            isOpen={sidebarOpen ?? window.innerWidth >= 1024}
+            isOpen={isMobile ? sidebarOpen : true}
             onClose={() => setSidebarOpen(false)}
           />
         </div>
         <section className="flex-1 min-w-0">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <div className="flex items-center gap-2 w-full md:w-auto justify-between md:justify-start">
+              <span className="text-xs text-gray-500">Sort by</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="border rounded px-2 py-1 text-xs focus:outline-none"
+                aria-label="Sort By"
+              >
+                <option value="name">Name</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="popularity">Popularity</option>
+                <option value="rating">Rating</option>
+              </select>
+              <button
+                className="lg:hidden ml-auto px-2 py-2 bg-gray-200 rounded text-gray-700 cursor-pointer flex items-center"
+                onClick={() => setSidebarOpen(true)}
+                aria-label="Open Filters"
+                style={{ minWidth: 40 }}
+              >
+                <Funnel size={20} />
+              </button>
+            </div>
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {selectedCategories.map((category) => (
                 <span
@@ -160,20 +198,6 @@ const ProductListing: React.FC = () => {
                   Clear All
                 </button>
               )}
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500">Sort by</span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="border rounded px-2 py-1 text-xs focus:outline-none"
-              >
-                <option value="name">Name</option>
-                <option value="price-low">Price: Low to High</option>
-                <option value="price-high">Price: High to Low</option>
-                <option value="popularity">Popularity</option>
-                <option value="rating">Rating</option>
-              </select>
             </div>
           </div>
           {productGridContent}
