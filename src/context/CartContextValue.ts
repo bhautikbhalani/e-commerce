@@ -1,8 +1,15 @@
+// src/context/CartContextValue.ts
 import { createContext } from 'react';
-import type { Product, CartItem } from '../utils/types';
+import type { Product } from '../utils/types';
 
 export interface CartContextType {
-  cartItems: CartItem[];
+  cartItems: {
+    id: number;
+    title: string;
+    price: number;
+    image: string;
+    quantity: number;
+  }[];
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (id: number) => void;
   updateQuantity: (id: number, quantity: number) => void;
@@ -10,4 +17,4 @@ export interface CartContextType {
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
-export default CartContext; 
+export default CartContext;

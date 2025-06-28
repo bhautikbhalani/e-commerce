@@ -5,10 +5,8 @@ import Newsletter from "../home/components/Newsletter";
 import FilterSidebar from "../../components/FilterSidebar";
 import ProductCard from "../../components/ProductCard";
 import Pagination from "../../components/Pagination";
-import ProductDetailModal from "../../components/ProductDetailModal";
 import { useProducts } from "../../hooks/useProducts";
-import type { Product } from "../../utils/types";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ProductListing: React.FC = () => {
   const {
@@ -27,8 +25,6 @@ const ProductListing: React.FC = () => {
   // UI state for sidebar and modal
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [modalProduct, setModalProduct] = useState<Product | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
   // Filtering and pagination logic moved here
@@ -48,16 +44,6 @@ const ProductListing: React.FC = () => {
     (currentPage - 1) * productsPerPage,
     currentPage * productsPerPage
   );
-
-  // Handlers
-  const handleViewDetails = (product: Product) => {
-    setModalProduct(product);
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    setModalProduct(null);
-  };
 
   // Reset page if filters change
   React.useEffect(() => {
@@ -85,11 +71,7 @@ const ProductListing: React.FC = () => {
     productGridContent = (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {paginatedProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onViewDetails={handleViewDetails}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     );
@@ -165,7 +147,10 @@ const ProductListing: React.FC = () => {
               {search && (
                 <span className="bg-gray-200 px-2 py-1 rounded-full flex items-center gap-1">
                   {search}
-                  <button onClick={() => setSearch("")} className="ml-1 cursor-pointer">
+                  <button
+                    onClick={() => setSearch("")}
+                    className="ml-1 cursor-pointer"
+                  >
                     &times;
                   </button>
                 </span>
@@ -212,13 +197,6 @@ const ProductListing: React.FC = () => {
       <Newsletter />
       {/* Footer */}
       <Footer />
-      {/* Product Detail Modal */}
-      <ProductDetailModal
-        product={modalProduct}
-        isOpen={modalOpen}
-        onClose={handleCloseModal}
-        onAddToCart={() => {}}
-      />
     </div>
   );
 };
