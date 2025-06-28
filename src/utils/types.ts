@@ -38,7 +38,7 @@ export interface PriceRange {
     max: number;
   }
   
-  export interface FilterSidebarProps {
+export interface FilterSidebarProps {
     categories: string[];
     selectedCategory: string;
     onCategoryChange: (category: string) => void;
@@ -48,7 +48,7 @@ export interface PriceRange {
     onSortChange: (value: string) => void;
     isOpen: boolean;
     onClose: () => void;
-  }
+}
 
 export interface ProductDetailModalProps {
     product: Product | null;

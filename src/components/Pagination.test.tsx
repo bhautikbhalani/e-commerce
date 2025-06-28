@@ -23,7 +23,7 @@ describe('Pagination', () => {
     render(<Pagination {...mockProps} />)
     
     const currentPageButton = screen.getByText('1')
-    expect(currentPageButton).toHaveClass('bg-blue-600')
+    expect(currentPageButton).toHaveClass('bg-black')
   })
 
   it('calls onPageChange when page is clicked', () => {
@@ -38,19 +38,19 @@ describe('Pagination', () => {
   it('shows previous button when not on first page', () => {
     render(<Pagination {...mockProps} currentPage={3} />)
     
-    expect(screen.getByText('Previous')).toBeInTheDocument()
+    expect(screen.getByLabelText('Previous Page')).toBeInTheDocument()
   })
 
   it('shows next button when not on last page', () => {
     render(<Pagination {...mockProps} currentPage={3} />)
     
-    expect(screen.getByText('Next')).toBeInTheDocument()
+    expect(screen.getByLabelText('Next Page')).toBeInTheDocument()
   })
 
   it('calls onPageChange when previous button is clicked', () => {
     render(<Pagination {...mockProps} currentPage={3} />)
     
-    const prevButton = screen.getByText('Previous')
+    const prevButton = screen.getByLabelText('Previous Page')
     fireEvent.click(prevButton)
     
     expect(mockProps.onPageChange).toHaveBeenCalledWith(2)
@@ -59,7 +59,7 @@ describe('Pagination', () => {
   it('calls onPageChange when next button is clicked', () => {
     render(<Pagination {...mockProps} currentPage={3} />)
     
-    const nextButton = screen.getByText('Next')
+    const nextButton = screen.getByLabelText('Next Page')
     fireEvent.click(nextButton)
     
     expect(mockProps.onPageChange).toHaveBeenCalledWith(4)
@@ -68,7 +68,7 @@ describe('Pagination', () => {
   it('handles single page', () => {
     render(<Pagination {...mockProps} totalPages={1} />)
     
-    expect(screen.queryByText('Previous')).not.toBeInTheDocument()
-    expect(screen.queryByText('Next')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Previous Page')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Next Page')).not.toBeInTheDocument()
   })
 }) 
