@@ -2,31 +2,20 @@ import React from "react";
 import { X } from "lucide-react";
 import type { FilterSidebarProps } from "../utils/types";
 
-interface MultiCategoryFilterSidebarProps
-  extends Omit<FilterSidebarProps, "selectedCategory" | "onCategoryChange"> {
-  selectedCategories: string[];
-  onCategoryChange: (categories: string[]) => void;
-}
-
-const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
+const FilterSidebar: React.FC<FilterSidebarProps> = ({
   categories,
-  selectedCategories,
+  selectedCategory,
   onCategoryChange,
   priceRange,
   onPriceRangeChange,
+  selectedSort,
+  onSortChange,
   isOpen,
   onClose,
 }) => {
-  const handleCategoryChange = (category: string) => {
-    if (selectedCategories.includes(category)) {
-      onCategoryChange(selectedCategories.filter((c) => c !== category));
-    } else {
-      onCategoryChange([...selectedCategories, category]);
-    }
-  };
-
   return (
     <>
+      {/* Mobile Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -34,113 +23,131 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
         />
       )}
 
-      <aside
-        className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-80 lg:w-full z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        } overflow-y-auto`}
-        aria-label="Product Filters"
-      >
-        <div className="bg-white rounded-lg shadow p-6 m-4 flex flex-col gap-6 items-center lg:items-stretch">
-          <div className="flex justify-between items-center mb-6 w-full lg:hidden">
-            <h2 className="text-xl font-bold text-gray-800">Filters</h2>
-            <button
-              onClick={onClose}
-              className="p-2"
-              aria-label="Close Filters"
-            >
-              <X className="w-6 h-6" />
-            </button>
-          </div>
+      {/* Sidebar */}
+      {isOpen && (
+        <div
+          className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-80 lg:w-full bg-white z-50 transform transition-transform duration-300 ease-in-out ${
+            isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+          } overflow-y-auto`}
+        >
+          <div className="p-6">
+            {/* Mobile Close Button */}
+            <div className="flex justify-between items-center mb-6 lg:hidden">
+              <h2 className="text-xl font-bold text-gray-800">Filters</h2>
+              <button onClick={onClose} className="p-2">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
 
-          <h2 className="text-xl font-bold text-gray-800 mb-6 hidden lg:block w-full">
-            Filters
-          </h2>
+            {/* Desktop Title */}
+            <h2 className="text-xl font-bold text-gray-800 mb-6 hidden lg:block">
+              Filters
+            </h2>
 
-          <section className="mb-6 w-full" aria-labelledby="filter-categories">
-            <h3
-              id="filter-categories"
-              className="font-semibold text-primary-700 mb-3"
-            >
-              Categories
-            </h3>
-            <div className="space-y-2">
-              {categories.map((category) => (
-                <label
-                  key={category}
-                  className="flex items-center cursor-pointer"
-                >
+            {/* Categories */}
+            <div className="mb-6">
+              <h3 className="font-semibold text-gray-700 mb-3">Categories</h3>
+              <div className="space-y-2">
+                <label className="flex items-center">
                   <input
-                    type="checkbox"
+                    type="radio"
                     name="category"
-                    checked={selectedCategories.includes(category)}
-                    onChange={() => handleCategoryChange(category)}
-                    className="mr-2 accent-black h-4 w-4"
+                    checked={selectedCategory === ""}
+                    onChange={() => onCategoryChange("")}
+                    className="mr-2"
+                    aria-label="All Categories"
                   />
-                  <span className="capitalize">{category}</span>
+                  All Categories
                 </label>
-              ))}
+                {categories.map((category) => (
+                  <label key={category} className="flex items-center">
+                    <input
+                      type="radio"
+                      name="category"
+                      checked={selectedCategory === category}
+                      onChange={() => onCategoryChange(category)}
+                      className="mr-2"
+                      aria-label={category}
+                    />
+                    <span className="capitalize">{category}</span>
+                  </label>
+                ))}
+              </div>
             </div>
-          </section>
 
-          <section className="mb-6 w-full" aria-labelledby="filter-price">
-            <h3
-              id="filter-price"
-              className="font-semibold text-primary-700 mb-3"
-            >
-              Price Range
-            </h3>
-            <div className="flex items-center gap-3">
-              <div className="flex flex-col">
-                <label
-                  htmlFor="min-price"
-                  className="text-xs text-gray-500 mb-1"
-                >
-                  Min
-                </label>
-                <input
-                  id="min-price"
-                  type="number"
-                  min={0}
-                  max={priceRange.max}
-                  value={priceRange.min}
-                  onChange={(e) =>
-                    onPriceRangeChange({
-                      ...priceRange,
-                      min: Math.min(Number(e.target.value), priceRange.max),
-                    })
-                  }
-                  className="w-16 border border-primary-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-400 text-sm"
-                  aria-label="Minimum Price"
-                />
-              </div>
-              <span className="mx-1 text-gray-400">-</span>
-              <div className="flex flex-col">
-                <label
-                  htmlFor="max-price"
-                  className="text-xs text-gray-500 mb-1"
-                >
-                  Max
-                </label>
-                <input
-                  id="max-price"
-                  type="number"
-                  min={priceRange.min}
-                  max={1000}
-                  value={priceRange.max}
-                  onChange={(e) =>
-                    onPriceRangeChange({
-                      ...priceRange,
-                      max: Math.max(Number(e.target.value), priceRange.min),
-                    })
-                  }
-                  className="w-16 border border-primary-200 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary-400 text-sm"
-                  aria-label="Maximum Price"
-                />
+            {/* Price Range */}
+            <div className="mb-6">
+              <h3 className="font-semibold text-gray-700 mb-3">Price Range</h3>
+              <div className="space-y-3">
+                <div>
+                  <label
+                    htmlFor="min-price"
+                    className="block text-sm text-gray-600 mb-1"
+                  >
+                    Min Price: ${priceRange?.min}
+                  </label>
+                  <input
+                    id="min-price"
+                    type="range"
+                    min="0"
+                    max="1000"
+                    value={priceRange?.min}
+                    onChange={(e) =>
+                      onPriceRangeChange({
+                        ...priceRange,
+                        min: parseInt(e.target.value, 10),
+                      })
+                    }
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="max-price"
+                    className="block text-sm text-gray-600 mb-1"
+                  >
+                    Max Price: ${priceRange?.max}
+                  </label>
+                  <input
+                    id="max-price"
+                    type="range"
+                    min="0"
+                    max="1000"
+                    value={priceRange?.max}
+                    onChange={(e) =>
+                      onPriceRangeChange({
+                        ...priceRange,
+                        max: parseInt(e.target.value, 10),
+                      })
+                    }
+                    className="w-full"
+                  />
+                </div>
               </div>
             </div>
-          </section>
+
+            {/* Sort By */}
+            <div className="mb-6">
+              <label
+                htmlFor="sort-select"
+                className="block font-semibold text-gray-700 mb-3"
+              >
+                Sort By
+              </label>
+              <select
+                id="sort-select"
+                value={selectedSort}
+                onChange={(e) => onSortChange(e.target.value)}
+                className="w-full border border-gray-300 rounded p-2"
+              >
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="name">Name: A to Z</option>
+              </select>
+            </div>
+          </div>
         </div>
-      </aside>
+      )}
     </>
   );
 };

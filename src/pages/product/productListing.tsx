@@ -107,10 +107,12 @@ const ProductListing: React.FC = () => {
           </button>
           <FilterSidebar
             categories={categories}
-            selectedCategories={selectedCategories}
-            onCategoryChange={setSelectedCategories}
+            selectedCategory={selectedCategories[0] || ''}
+            onCategoryChange={(category) => setSelectedCategories([category])}
             priceRange={priceRange}
             onPriceRangeChange={setPriceRange}
+            selectedSort={sortBy}
+            onSortChange={setSortBy}
             isOpen={sidebarOpen ?? window.innerWidth >= 1024}
             onClose={() => setSidebarOpen(false)}
           />

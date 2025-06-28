@@ -7,7 +7,6 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 ## ✨ Key Features
 
 ### 🏠 **Homepage Experience**
-
 - **Hero Section**: Engaging landing area with call-to-action buttons
 - **Featured Products**: Curated product showcase with dynamic loading
 - **Best Selling Items**: Popular products section with ratings
@@ -16,7 +15,6 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 - **Newsletter Subscription**: Email capture for marketing campaigns
 
 ### 🛒 **Shopping Experience**
-
 - **Product Catalog**: Comprehensive product listing with filtering
 - **Advanced Search**: Real-time search functionality with instant results
 - **Smart Filtering**: Category-based and price range filtering
@@ -25,14 +23,12 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 - **Product Details**: Modal-based detailed product view
 
 ### 🛍️ **Cart Management**
-
 - **Shopping Cart**: Persistent cart state across sessions
 - **Quantity Management**: Add, update, and remove items
 - **Cart Modal**: Quick cart overview with item management
 - **Cart Page**: Dedicated cart management interface
 
 ### 🎨 **User Interface**
-
 - **Responsive Design**: Mobile-first approach with breakpoint optimization
 - **Modern UI/UX**: Clean, intuitive interface with smooth animations
 - **Accessibility**: WCAG compliant design patterns
@@ -40,7 +36,6 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 - **Error Handling**: User-friendly error messages and fallbacks
 
 ### 🧭 **Navigation & Layout**
-
 - **Header Navigation**: Main navigation with cart indicator
 - **Breadcrumb Navigation**: Clear page hierarchy
 - **Footer**: Comprehensive site information and links
@@ -49,7 +44,6 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 ## 🏗️ Technical Architecture
 
 ### **Frontend Stack**
-
 - **React 19.1.0**: Latest React with concurrent features
 - **TypeScript 5.8.3**: Type-safe development with strict configuration
 - **Vite 6.3.5**: Lightning-fast build tool and development server
@@ -57,19 +51,16 @@ A sophisticated, feature-rich e-commerce application built with React, TypeScrip
 - **Tailwind CSS 4.1.10**: Utility-first CSS framework with custom design system
 
 ### **State Management**
-
 - **React Context API**: Global state management for cart functionality
 - **Custom Hooks**: Reusable logic for products, cart, and UI state
 - **Local State**: Component-level state management with React hooks
 
 ### **Data Management**
-
 - **Axios**: HTTP client for API communication
 - **GraphQL Support**: Apollo Client integration for flexible data fetching
 - **Custom API Hooks**: Centralized data fetching with error handling
 
 ### **UI Components**
-
 - **Swiper**: Touch-enabled carousel and slider components
 - **Lucide React**: Beautiful, customizable icons
 - **Custom Components**: Reusable, modular component architecture
@@ -109,42 +100,36 @@ src/
 ## 🎯 Code Quality & Best Practices
 
 ### **TypeScript Implementation**
-
 - **Strict Type Checking**: Comprehensive type definitions for all components
 - **Interface Design**: Well-defined interfaces for props and data structures
 - **Type Safety**: Full type coverage for API responses and state management
 - **Generic Types**: Reusable type definitions for common patterns
 
 ### **Component Architecture**
-
 - **Functional Components**: Modern React with hooks-based architecture
 - **Props Interface**: Strongly typed component props
 - **Component Composition**: Modular, reusable component design
 - **Separation of Concerns**: Clear separation between UI and business logic
 
 ### **State Management**
-
 - **Context API**: Efficient global state management
 - **Custom Hooks**: Encapsulated business logic in reusable hooks
 - **Local State**: Appropriate use of component-level state
 - **State Persistence**: Cart state persistence across sessions
 
 ### **Performance Optimization**
-
 - **Memoization**: React.memo and useMemo for performance optimization
 - **Lazy Loading**: Efficient data loading and pagination
 - **Code Splitting**: Route-based code splitting for better performance
 - **Optimized Rendering**: Minimal re-renders with proper dependency arrays
 
 ### **Error Handling**
-
 - **Try-Catch Blocks**: Comprehensive error handling in async operations
 - **User Feedback**: Clear error messages and loading states
 - **Fallback UI**: Graceful degradation for failed operations
 - **Error Boundaries**: React error boundary implementation
 
 ### **Code Quality Tools**
-
 - **ESLint**: Strict linting rules for code consistency
 - **TypeScript Strict Mode**: Comprehensive type checking
 - **Prettier Integration**: Consistent code formatting
@@ -153,7 +138,6 @@ src/
 ## 🔍 **SonarQube Code Quality Analysis**
 
 ### **Quality Gates & Metrics**
-
 - **Code Coverage**: Minimum 70% coverage threshold for branches, functions, lines, and statements
 - **Code Duplication**: Detection of duplicate code with configurable thresholds
 - **Security Hotspots**: Identification of potential security vulnerabilities
@@ -161,14 +145,12 @@ src/
 - **Bugs**: Static analysis to identify potential bugs before runtime
 
 ### **SonarQube Configuration**
-
 - **Project Key**: `e-commerce-react`
 - **Analysis Scope**: TypeScript/JavaScript source code with React components
 - **Exclusions**: Configuration files, build outputs, and test files
 - **Quality Gate**: Automated quality checks with customizable thresholds
 
 ### **Quality Analysis Commands**
-
 ```bash
 # Run complete quality analysis
 npm run quality:check
@@ -189,7 +171,6 @@ npm run sonar
 ## 🎨 Design System
 
 ### **Custom Tailwind Configuration**
-
 - **Color Palette**: Custom primary and secondary color schemes
 - **Typography**: Inter font family with responsive text sizing
 - **Spacing System**: Consistent spacing scale with custom values
@@ -198,7 +179,6 @@ npm run sonar
 - **Breakpoints**: Responsive design with custom breakpoint system
 
 ### **Component Styling**
-
 - **Utility-First**: Tailwind CSS utility classes for rapid development
 - **Custom Components**: Reusable styled components with consistent design
 - **Responsive Design**: Mobile-first approach with progressive enhancement
@@ -207,12 +187,10 @@ npm run sonar
 ## 🚀 Getting Started
 
 ### **Prerequisites**
-
-- Node.js 18+
+- Node.js 18+ 
 - npm or yarn package manager
 
 ### **Installation**
-
 ```bash
 # Clone the repository
 git clone <repository-url>
@@ -232,7 +210,6 @@ npm run preview
 ```
 
 ### **Available Scripts**
-
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
@@ -246,7 +223,6 @@ npm run preview
 ## 🔧 Development Features
 
 ### **Development Tools**
-
 - **ESLint**: Code linting with React and TypeScript rules
 - **TypeScript**: Static type checking and IntelliSense
 - **Vite**: Fast hot module replacement and build optimization
@@ -255,7 +231,6 @@ npm run preview
 - **SonarQube**: Comprehensive code quality analysis
 
 ### **Code Quality**
-
 - **ESLint Configuration**: Strict linting rules for code consistency
 - **TypeScript Strict Mode**: Comprehensive type checking
 - **Prettier Integration**: Consistent code formatting
@@ -265,14 +240,12 @@ npm run preview
 ## 📱 Responsive Design
 
 ### **Breakpoint Strategy**
-
 - **Mobile First**: Base styles for mobile devices
 - **Tablet**: Optimized layout for tablet screens
 - **Desktop**: Enhanced experience for larger screens
 - **Custom Breakpoints**: Tailored breakpoints for specific use cases
 
 ### **Mobile Optimization**
-
 - **Touch-Friendly**: Optimized touch targets and gestures
 - **Performance**: Optimized loading for mobile networks
 - **Navigation**: Mobile-optimized navigation patterns
@@ -281,7 +254,6 @@ npm run preview
 ## 🔒 Security & Performance
 
 ### **Security Measures**
-
 - **Input Validation**: Client-side validation for user inputs
 - **XSS Prevention**: Safe rendering of dynamic content
 - **CSRF Protection**: Built-in CSRF protection mechanisms
@@ -289,7 +261,6 @@ npm run preview
 - **Security Hotspots**: SonarQube security vulnerability detection
 
 ### **Performance Features**
-
 - **Code Splitting**: Route-based code splitting
 - **Lazy Loading**: On-demand component loading
 - **Image Optimization**: Optimized image loading and display
@@ -299,7 +270,6 @@ npm run preview
 ## 🧪 Testing Strategy
 
 ### **Testing Approach**
-
 - **Component Testing**: Unit tests for individual components
 - **Integration Testing**: End-to-end user flow testing
 - **Accessibility Testing**: WCAG compliance verification
@@ -307,7 +277,6 @@ npm run preview
 - **Code Coverage**: Comprehensive test coverage reporting
 
 ### **Testing Tools**
-
 - **Vitest**: Fast unit testing framework
 - **React Testing Library**: Component testing utilities
 - **Coverage Reports**: Detailed coverage analysis
@@ -316,14 +285,12 @@ npm run preview
 ## 📈 Scalability & Maintainability
 
 ### **Scalable Architecture**
-
 - **Modular Design**: Component-based architecture for easy scaling
 - **State Management**: Scalable state management patterns
 - **API Integration**: Flexible API integration layer
 - **Code Organization**: Clear separation of concerns
 
 ### **Maintenance Features**
-
 - **Documentation**: Comprehensive code documentation
 - **Type Safety**: TypeScript for better maintainability
 - **Consistent Patterns**: Standardized coding patterns
@@ -333,14 +300,12 @@ npm run preview
 ## 🎯 Business Value
 
 ### **Customer Experience**
-
 - **Intuitive Navigation**: Easy-to-use interface for all users
 - **Fast Performance**: Optimized loading times and smooth interactions
 - **Mobile Optimization**: Seamless experience across all devices
 - **Accessibility**: Inclusive design for users with disabilities
 
 ### **Business Features**
-
 - **Product Discovery**: Advanced search and filtering capabilities
 - **Shopping Cart**: Streamlined purchasing process
 - **User Engagement**: Newsletter subscription and featured content
@@ -350,7 +315,6 @@ npm run preview
 ## 🤝 Contributing
 
 We welcome contributions! Please see our contributing guidelines for details on:
-
 - Code style and standards
 - Pull request process
 - Issue reporting
@@ -365,4 +329,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 **Built with ❤️ using React, TypeScript, and Tailwind CSS**
 
-_This e-commerce platform represents modern web development best practices with a focus on user experience, performance, maintainability, and code quality._
+*This e-commerce platform represents modern web development best practices with a focus on user experience, performance, maintainability, and code quality.*

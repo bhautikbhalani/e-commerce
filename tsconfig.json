@@ -2,6 +2,10 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    { "path": "./tsconfig.vitest.json" }
+  ],
+  "compilerOptions": {
+    "lib": ["DOM", "ES2015", "DOM.Iterable", "ScriptHost"],
+    "esModuleInterop": true
+  }
 }
