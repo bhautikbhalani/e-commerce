@@ -20,7 +20,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         <h2 className="text-2xl font-bold text-gray-800">Product Details</h2>
                         <button
                             onClick={onClose}
-                            className="p-2 hover:bg-gray-100 rounded-full"
+                            className="p-2 hover:bg-gray-100 rounded-full cursor-pointer"
                         >
                             <X className="w-6 h-6" />
                         </button>
@@ -66,7 +66,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                             <button
                                 onClick={() => onAddToCart(product)}
-                                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2"
+                                className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <ShoppingCart className="w-5 h-5" />
                                 Add to Cart

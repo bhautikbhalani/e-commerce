@@ -8,6 +8,7 @@ import Pagination from "../../components/Pagination";
 import ProductDetailModal from "../../components/ProductDetailModal";
 import { useProducts } from "../../hooks/useProducts";
 import type { Product } from "../../utils/types";
+import { Link } from 'react-router-dom';
 
 const ProductListing: React.FC = () => {
   const {
@@ -101,9 +102,9 @@ const ProductListing: React.FC = () => {
       <div className="w-full bg-gray-50 border-b">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center gap-2 text-xs text-gray-500">
-            <a href="/" className="hover:underline">
+            <Link to="/" className="hover:underline">
               Ecommerce
-            </a>
+            </Link>
             <span>/</span>
             <span className="font-semibold text-gray-700">Search</span>
           </div>
@@ -123,7 +124,7 @@ const ProductListing: React.FC = () => {
         {/* Sidebar */}
         <div className="lg:w-64 w-full lg:static fixed z-50 top-0 left-0 h-full lg:h-auto">
           <button
-            className="lg:hidden mb-4 px-4 py-2 bg-gray-200 rounded text-gray-700"
+            className="lg:hidden mb-4 px-4 py-2 bg-gray-200 rounded text-gray-700 cursor-pointer"
             onClick={() => setSidebarOpen(true)}
           >
             Filters
@@ -155,7 +156,7 @@ const ProductListing: React.FC = () => {
                         selectedCategories.filter((c) => c !== category)
                       )
                     }
-                    className="ml-1"
+                    className="ml-1 cursor-pointer"
                   >
                     &times;
                   </button>
@@ -164,14 +165,14 @@ const ProductListing: React.FC = () => {
               {search && (
                 <span className="bg-gray-200 px-2 py-1 rounded-full flex items-center gap-1">
                   {search}
-                  <button onClick={() => setSearch("")} className="ml-1">
+                  <button onClick={() => setSearch("")} className="ml-1 cursor-pointer">
                     &times;
                   </button>
                 </span>
               )}
               {(selectedCategories.length > 0 || !!search) && (
                 <button
-                  className="text-xs text-blue-600 hover:underline ml-2"
+                  className="text-xs text-blue-600 hover:underline ml-2 cursor-pointer"
                   onClick={() => {
                     setSelectedCategories([]);
                     setSearch("");

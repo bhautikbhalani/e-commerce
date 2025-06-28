@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 import type { ProductCardProps } from "../utils/types";
+import useCart from '../context/useCart';
 
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   onViewDetails,
 }) => {
+  const { addToCart } = useCart();
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       onViewDetails?.(product);
@@ -29,35 +32,44 @@ const ProductCard: React.FC<ProductCardProps> = ({
   }, []);
 
   return (
-    <button
-      type="button"
-      aria-label={`View details for ${product.title}`}
-      className="bg-white rounded-md shadow flex flex-col items-stretch cursor-pointer hover:shadow-lg transition-shadow duration-300 h-100 focus:outline-none focus:ring-2 focus:ring-primary-400 w-full text-left p-0 border-0"
-      onClick={() => onViewDetails?.(product)}
-      onKeyDown={handleKeyDown}
+    <div
+      className="bg-white rounded-md shadow flex flex-col items-stretch hover:shadow-lg transition-shadow duration-300 h-100 focus:outline-none focus:ring-2 focus:ring-primary-400 w-full text-left p-0 border-0"
     >
-      <div className="flex-1 flex items-center justify-center bg-gray-100 rounded-t-md m-0">
+      <button
+        type="button"
+        aria-label={`View details for ${product.title}`}
+        className="flex-1 flex items-center justify-center bg-gray-100 rounded-t-md m-0 w-full cursor-pointer"
+        onClick={() => onViewDetails?.(product)}
+        onKeyDown={handleKeyDown}
+        style={{ border: 'none', background: 'none', padding: 0, margin: 0 }}
+      >
         <img
           src={product.image}
           alt={product.title}
           className="w-40 h-40 object-contain"
         />
-      </div>
-      <div className="px-6 py-4">
+      </button>
+      <div className="px-6 py-4 flex flex-col gap-2">
         <div
-          className="font-medium text-center truncate w-full min-h-[1.5rem] mb-4"
+          className="font-medium text-center truncate w-full min-h-[1.5rem] mb-2"
           title={product.title}
         >
           {product.title}
         </div>
-        <div className="flex items-center gap-3 justify-center">
+        <div className="flex items-center gap-3 justify-center mb-2">
           <div className="text-xs text-gray-700 border border-gray-400 rounded-full px-3 py-1">
             IN STOCK
           </div>
           <div className="text-gray-700 font-semibold">${product.price}</div>
         </div>
+        <button
+          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800 transition font-semibold cursor-pointer"
+          onClick={() => addToCart(product)}
+        >
+          Add to Cart
+        </button>
       </div>
-    </button>
+    </div>
   );
 };
 
