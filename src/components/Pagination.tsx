@@ -6,6 +6,7 @@ const Pagination: React.FC<PaginationProps> = ({
     totalPages,
     onPageChange,
 }) => {
+    if (totalPages <= 1) return null;
     const pages: number[] = [];
     const maxVisible = 5;
 

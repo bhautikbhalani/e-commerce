@@ -1,88 +1,69 @@
-import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
-import ProductCard from './ProductCard'
-import CartProvider from '../context/CartContext'
+import { describe, it, expect, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import ProductCard from "./ProductCard";
+import CartProvider from "../context/CartContext";
+import { MemoryRouter } from "react-router-dom";
 
-// Mock product data
+// 🧩 Partial mock to preserve MemoryRouter
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual<typeof import("react-router-dom")>(
+    "react-router-dom"
+  );
+  return {
+    ...actual,
+    // Optionally mock specific hooks here, e.g., useNavigate
+  };
+});
+
 const mockProduct = {
   id: 1,
-  title: 'Test Product',
+  title: "Test Product",
   price: 99.99,
-  description: 'A test product description',
-  category: 'electronics',
-  image: 'test-image.jpg',
+  description: "A test product description",
+  category: "electronics",
+  image: "test-image.jpg",
   rating: {
     rate: 4.5,
-    count: 100
-  }
-}
+    count: 100,
+  },
+};
 
-// Test wrapper component
+// Test wrapper with router + cart provider
 const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-  <CartProvider>
-    {children}
-  </CartProvider>
-)
+  <MemoryRouter>
+    <CartProvider>{children}</CartProvider>
+  </MemoryRouter>
+);
 
-describe('ProductCard', () => {
-  it('renders product information correctly', () => {
-    const mockOnViewDetails = () => {}
-    
+describe("ProductCard", () => {
+  it("renders product information correctly", () => {
     render(
       <TestWrapper>
-        <ProductCard 
-          product={mockProduct} 
-          onViewDetails={mockOnViewDetails}
-        />
+        <ProductCard product={mockProduct} />
       </TestWrapper>
-    )
+    );
 
-    // Check for title
-    expect(screen.getByText('Test Product')).toBeInTheDocument()
-    
-    // Check for price
-    expect(screen.getByText('$99.99')).toBeInTheDocument()
-    
-    // Check for "IN STOCK" text
-    expect(screen.getByText('IN STOCK')).toBeInTheDocument()
-    
-    // Check for "Add to Cart" button
-    expect(screen.getByText('Add to Cart')).toBeInTheDocument()
-  })
+    expect(screen.getByText("Test Product")).toBeInTheDocument();
+    expect(screen.getByText("$99.99")).toBeInTheDocument();
+    expect(screen.getByText("IN STOCK")).toBeInTheDocument();
+    expect(screen.getByText("Add to Cart")).toBeInTheDocument();
+  });
 
-  it('calls onViewDetails when view details button is clicked', () => {
-    const mockOnViewDetails = vi.fn()
-    
+  it("renders product image with correct alt text and href", () => {
     render(
       <TestWrapper>
-        <ProductCard 
-          product={mockProduct} 
-          onViewDetails={mockOnViewDetails}
-        />
+        <ProductCard product={mockProduct} />
       </TestWrapper>
-    )
+    );
 
-    // Click on the image button (which triggers onViewDetails)
-    const imageButton = screen.getByRole('button', { name: /view details for test product/i })
-    imageButton.click()
+    const image = screen.getByAltText("Test Product");
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute("src", "test-image.jpg");
 
-    expect(mockOnViewDetails).toHaveBeenCalledWith(mockProduct)
-  })
-
-  it('renders product image with correct alt text', () => {
-    const mockOnViewDetails = () => {}
-    
-    render(
-      <TestWrapper>
-        <ProductCard 
-          product={mockProduct} 
-          onViewDetails={mockOnViewDetails}
-        />
-      </TestWrapper>
-    )
-
-    const image = screen.getByAltText('Test Product')
-    expect(image).toBeInTheDocument()
-    expect(image).toHaveAttribute('src', 'test-image.jpg')
-  })
-}) 
+    const link = screen.getByRole("link", {
+      name: /view details for test product/i,
+    });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "/product/1");
+  });
+});

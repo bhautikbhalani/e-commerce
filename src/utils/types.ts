@@ -32,17 +32,19 @@ export interface CartModalProps {
 export interface PriceRange {
     min: number;
     max: number;
-}
-
-export interface FilterSidebarProps {
+  }
+  
+  export interface FilterSidebarProps {
     categories: string[];
     selectedCategory: string;
     onCategoryChange: (category: string) => void;
     priceRange: PriceRange;
     onPriceRangeChange: (range: PriceRange) => void;
+    selectedSort: string;
+    onSortChange: (value: string) => void;
     isOpen: boolean;
     onClose: () => void;
-}
+  }
 
 export interface ProductDetailModalProps {
     product: Product | null;

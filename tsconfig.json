@@ -1,19 +1,8 @@
 {
   "files": [],
+  "include": ["src"],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
-  "extends": "./tsconfig.app.json",
-  "compilerOptions": {
-    "types": []
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx"
-  ],
-  "exclude": [
-    "src/**/*.test.ts",
-    "src/**/*.test.tsx"
+    { "path": "./tsconfig.vitest.json" }
   ]
 }
