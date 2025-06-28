@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import type { Product, CartItem } from '../utils/types';
 import type { ReactNode } from 'react';
 import CartContext from './CartContextValue';
