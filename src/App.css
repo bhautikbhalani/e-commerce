@@ -41,6 +41,4 @@ body {
   color: #888;
 }
 
-@layer base {
-  /* ... */
-}
+@layer base {}

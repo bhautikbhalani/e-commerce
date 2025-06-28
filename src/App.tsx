@@ -20,7 +20,6 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
-          {/* Add more routes as needed */}
         </Routes>
       </Router>
     </CartProvider>

@@ -25,12 +25,10 @@ const ProductDetailPage: React.FC = () => {
     return <div className="text-center p-10 text-white">Product not found</div>;
 
   const handleAddToCart = () => {
-    // Add product with quantity (either via loop or enhanced cart context)
     for (let i = 0; i < quantity; i++) {
       addToCart(product, quantity);
     }
 
-    // Redirect to cart page
     navigate("/cart");
   };
 
@@ -39,7 +37,6 @@ const ProductDetailPage: React.FC = () => {
       <Header />
 
       <main className="flex-1 w-full max-w-7xl mx-auto px-4 md:px-8 py-10">
-        {/* Breadcrumb */}
         <div className="text-sm text-gray-500 mb-6">
           <span className="hover:underline cursor-pointer">Ecommerce</span>
           <span className="mx-1">/</span>
@@ -48,7 +45,6 @@ const ProductDetailPage: React.FC = () => {
           </span>
         </div>
 
-        {/* Product grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div className="bg-gray-100 rounded-lg p-6 flex justify-center items-center">
             <img
@@ -80,7 +76,6 @@ const ProductDetailPage: React.FC = () => {
               ${(product.price * quantity).toFixed(2)}
             </div>
 
-            {/* Quantity Selector */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">
                 Quantity
@@ -102,7 +97,6 @@ const ProductDetailPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Buttons */}
             <div className="flex gap-2 mt-4">
               <button
                 onClick={handleAddToCart}
@@ -122,7 +116,6 @@ const ProductDetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Description */}
         <div className="mt-16">
           <h2 className="text-lg font-semibold text-gray-900 mb-2">Detail</h2>
           <p className="text-gray-600 leading-relaxed max-w-3xl mb-4">
@@ -139,7 +132,6 @@ const ProductDetailPage: React.FC = () => {
           </ul>
         </div>
 
-        {/* Similar Products */}
         {similarProducts.length > 0 && (
           <div className="mt-16">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">

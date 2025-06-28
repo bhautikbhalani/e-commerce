@@ -27,7 +27,6 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
 
   return (
     <>
-      {/* Mobile Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
@@ -35,7 +34,6 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed lg:static top-0 left-0 h-full lg:h-auto w-80 lg:w-full z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
@@ -43,7 +41,6 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
         aria-label="Product Filters"
       >
         <div className="bg-white rounded-lg shadow p-6 m-4 flex flex-col gap-6 items-center lg:items-stretch">
-          {/* Mobile Close Button */}
           <div className="flex justify-between items-center mb-6 w-full lg:hidden">
             <h2 className="text-xl font-bold text-gray-800">Filters</h2>
             <button
@@ -55,12 +52,10 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
             </button>
           </div>
 
-          {/* Desktop Title */}
           <h2 className="text-xl font-bold text-gray-800 mb-6 hidden lg:block w-full">
             Filters
           </h2>
 
-          {/* Categories */}
           <section className="mb-6 w-full" aria-labelledby="filter-categories">
             <h3
               id="filter-categories"
@@ -87,7 +82,6 @@ const FilterSidebar: React.FC<MultiCategoryFilterSidebarProps> = ({
             </div>
           </section>
 
-          {/* Price Range */}
           <section className="mb-6 w-full" aria-labelledby="filter-price">
             <h3
               id="filter-price"

@@ -7,7 +7,6 @@ const CART_STORAGE_KEY = "cart_items";
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // Initialize from localStorage
     try {
       const stored = localStorage.getItem(CART_STORAGE_KEY);
       return stored ? JSON.parse(stored) : [];
@@ -17,7 +16,6 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   });
 
-  // Persist cart to localStorage when cartItems change
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cartItems));

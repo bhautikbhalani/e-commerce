@@ -1,4 +1,3 @@
-// src/context/CartContextValue.ts
 import { createContext } from 'react';
 import type { Product } from '../utils/types';
 

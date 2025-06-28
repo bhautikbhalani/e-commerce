@@ -22,12 +22,10 @@ const ProductListing: React.FC = () => {
     setSortBy,
   } = useProducts();
 
-  // UI state for sidebar and modal
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
-  // Filtering and pagination logic moved here
   const productsPerPage = 9;
   const filteredProducts = allProducts.filter((product) => {
     const matchesCategory =
@@ -45,7 +43,6 @@ const ProductListing: React.FC = () => {
     currentPage * productsPerPage
   );
 
-  // Reset page if filters change
   React.useEffect(() => {
     setCurrentPage(1);
   }, [selectedCategories, search, setCurrentPage]);
@@ -80,7 +77,6 @@ const ProductListing: React.FC = () => {
   return (
     <div className="bg-white w-full min-h-screen flex flex-col">
       <Header />
-      {/* Breadcrumb and Search */}
       <div className="w-full bg-gray-50 border-b">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -101,9 +97,7 @@ const ProductListing: React.FC = () => {
           </div>
         </div>
       </div>
-      {/* Main Content */}
       <main className="flex-1 w-full max-w-7xl mx-auto px-2 md:px-8 py-8 flex flex-col lg:flex-row gap-8">
-        {/* Sidebar */}
         <div className="lg:w-64 w-full lg:static fixed z-50 top-0 left-0 h-full lg:h-auto">
           <button
             className="lg:hidden mb-4 px-4 py-2 bg-gray-200 rounded text-gray-700 cursor-pointer"
@@ -121,9 +115,7 @@ const ProductListing: React.FC = () => {
             onClose={() => setSidebarOpen(false)}
           />
         </div>
-        {/* Product Grid Section */}
         <section className="flex-1 min-w-0">
-          {/* Applied Filters and Sort */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
             <div className="flex flex-wrap items-center gap-2 text-xs">
               {selectedCategories.map((category) => (
@@ -167,7 +159,6 @@ const ProductListing: React.FC = () => {
                 </button>
               )}
             </div>
-            {/* Sort By */}
             <div className="flex items-center gap-2">
               <span className="text-xs text-gray-500">Sort by</span>
               <select
@@ -183,9 +174,7 @@ const ProductListing: React.FC = () => {
               </select>
             </div>
           </div>
-          {/* Product Grid */}
           {productGridContent}
-          {/* Pagination */}
           <Pagination
             currentPage={currentPage}
             totalPages={totalFilteredPages}
@@ -193,9 +182,7 @@ const ProductListing: React.FC = () => {
           />
         </section>
       </main>
-      {/* Newsletter */}
       <Newsletter />
-      {/* Footer */}
       <Footer />
     </div>
   );

@@ -7,7 +7,6 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const searchBarRef = useRef<HTMLDivElement>(null);
 
-  // Prevent background scroll when search is open (now removed, since no overlay)
   useEffect(() => {
     document.body.style.overflow = "";
     return () => {
@@ -31,7 +30,6 @@ const Header = () => {
             </div>
             <span className="font-bold text-lg">Ecommerce</span>
           </div>
-          {/* Desktop Nav */}
           <nav className="hidden md:flex gap-6 text-sm text-gray-700">
             <Link to="/" className="hover:text-black text-gray-500">
               Home
@@ -50,7 +48,6 @@ const Header = () => {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            {/* Search input for md+ */}
             <div className="relative hidden md:block">
               <input
                 type="text"
@@ -68,7 +65,6 @@ const Header = () => {
                 <path d="M21 21l-4.35-4.35" />
               </svg>
             </div>
-            {/* Search icon for mobile/tablet */}
             <button
               className="md:hidden p-2 rounded-full hover:bg-gray-100 cursor-pointer"
               aria-label="Open search"
@@ -110,7 +106,6 @@ const Header = () => {
                 <path d="M5.5 21a7.5 7.5 0 0115 0" />
               </svg>
             </button>
-            {/* Hamburger Icon (moved after user icon) */}
             <button
               className="md:hidden flex flex-col justify-center items-center w-10 h-10 border rounded cursor-pointer"
               aria-label="Open menu"
@@ -122,7 +117,6 @@ const Header = () => {
             </button>
           </div>
         </div>
-        {/* Mobile Menu Drawer */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex justify-end md:hidden">
             <div className="bg-white w-64 h-full shadow-lg flex flex-col p-6 relative animate-slide-in">
@@ -180,10 +174,8 @@ const Header = () => {
             </div>
           </div>
         )}
-        {/* Mobile Search Popup - no overlay, just search bar below header */}
         {searchOpen && (
           <div className="absolute left-0 right-0 top-[72px] mx-auto w-full max-w-md px-4 md:hidden z-50">
-            {/* Arrow pointer */}
             <div className="absolute left-1/2 -top-3 transform -translate-x-1/2">
               <div className="w-6 h-3 overflow-hidden inline-block">
                 <div
@@ -200,7 +192,6 @@ const Header = () => {
                   "0 8px 32px 0 rgba(60,60,60,0.18), 0 1.5px 8px 0 rgba(60,60,60,0.10)",
               }}
             >
-              {/* Close button on left */}
               <button
                 className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-black text-white rounded-full text-xl cursor-pointer shadow"
                 aria-label="Close search"

@@ -13,7 +13,6 @@ const BestSelling = () => {
     .sort((a, b) => b.rating.count - a.rating.count)
     .slice(0, 8);
 
-  // Duplicate products for better loop performance
   const duplicatedProducts =
     topProducts.length > 0 ? [...topProducts, ...topProducts] : [];
 

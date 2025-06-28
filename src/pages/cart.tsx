@@ -20,7 +20,6 @@ const CartPage = () => {
     <div className="bg-[#F9F9F9] min-h-screen flex flex-col justify-between">
       <Header />
 
-      {/* Breadcrumb */}
       <div className="w-full bg-[#F4F4F4] border-b">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-6">
           <div className="text-2xl font-semibold mb-2">Cart</div>
@@ -30,9 +29,7 @@ const CartPage = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <main className="container mx-auto flex flex-col md:flex-row gap-8 py-12 px-6 flex-1">
-        {/* Cart Items */}
         <section className="flex-1 bg-white rounded shadow p-6">
           <div className="text-sm font-semibold mb-6">Your cart</div>
           <div className="border-b mb-4" />
@@ -96,7 +93,6 @@ const CartPage = () => {
           )}
         </section>
 
-        {/* Order Summary */}
         <aside className="w-full md:w-80 bg-white rounded shadow p-6 h-fit">
           <div className="font-semibold mb-4">Order Summary</div>
           <div className="flex justify-between text-sm mb-2">

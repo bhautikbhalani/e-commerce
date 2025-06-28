@@ -45,7 +45,6 @@ export const useProducts = () => {
             return matchesCategory && matchesPrice;
         });
 
-        // Sort
         filtered.sort((a, b) => {
             switch (sortBy) {
                 case 'price-low':
@@ -72,7 +71,6 @@ export const useProducts = () => {
         return filteredAndSortedProducts.slice(start, end);
     }, [filteredAndSortedProducts, currentPage]);
 
-    // Reset page on filters change
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedCategory, priceRange, sortBy]);
