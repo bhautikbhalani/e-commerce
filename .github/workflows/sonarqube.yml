@@ -7,8 +7,8 @@ on:
     branches: [main, develop]
 
 jobs:
-  sonarcloud:
-    name: SonarCloud
+  sonarqube:
+    name: SonarCloud Analysis
     runs-on: ubuntu-latest
 
     steps:
@@ -38,5 +38,3 @@ jobs:
           projectBaseDir: .
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: bhautikbhalani_e-commerce
-          SONAR_ORGANIZATION: bhautikbhalani
