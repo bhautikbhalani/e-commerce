@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 const BestSelling = () => {
-  const { products } = useProducts();
+  const { allProducts } = useProducts();
 
-  const topProducts = [...products]
+  const topProducts = [...allProducts]
     .sort((a, b) => b.rating.count - a.rating.count)
     .slice(0, 8);
 

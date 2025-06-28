@@ -2,7 +2,7 @@
 
 A sophisticated, feature-rich e-commerce application built with React, TypeScript, and modern web technologies. This project demonstrates enterprise-level code quality, scalable architecture, and exceptional user experience.
 
-![Fashion Paradise](public/fashionparadise.png)
+![Fashion Paradise](public/fashionparadis.png)
 
 ## ✨ Key Features
 

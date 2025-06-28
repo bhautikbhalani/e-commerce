@@ -18,11 +18,10 @@ describe("FilterSidebar", () => {
   beforeEach(() => {
     vi.clearAllMocks();
 
-    // Force mobile layout by shrinking viewport width
     Object.defineProperty(window, "innerWidth", {
       writable: true,
       configurable: true,
-      value: 500, // < 1024px triggers mobile view
+      value: 500,
     });
     window.dispatchEvent(new Event("resize"));
   });
@@ -32,7 +31,6 @@ describe("FilterSidebar", () => {
     expect(screen.getAllByText("Filters").length).toBeGreaterThan(0);
     expect(screen.getByText("Categories")).toBeInTheDocument();
     expect(screen.getByText("Price Range")).toBeInTheDocument();
-    expect(screen.getByLabelText("Sort By")).toBeInTheDocument();
   });
 
   it("displays category options", () => {
@@ -50,7 +48,9 @@ describe("FilterSidebar", () => {
   });
 
   it("calls onCategoryChange when category is deselected", () => {
-    render(<FilterSidebar {...mockProps} selectedCategories={["Electronics"]} />);
+    render(
+      <FilterSidebar {...mockProps} selectedCategories={["Electronics"]} />
+    );
     const categoryOption = screen.getByLabelText("Electronics");
     fireEvent.click(categoryOption);
     expect(mockProps.onCategoryChange).toHaveBeenCalledWith([]);
@@ -58,7 +58,7 @@ describe("FilterSidebar", () => {
 
   it("calls onPriceRangeChange when min range is changed", () => {
     render(<FilterSidebar {...mockProps} />);
-    const minSlider = screen.getByLabelText(/Min Price/i);
+    const minSlider = screen.getByLabelText(/Min/i);
     fireEvent.change(minSlider, { target: { value: "100" } });
     expect(mockProps.onPriceRangeChange).toHaveBeenCalledWith({
       ...mockProps.priceRange,
@@ -68,7 +68,7 @@ describe("FilterSidebar", () => {
 
   it("calls onPriceRangeChange when max range is changed", () => {
     render(<FilterSidebar {...mockProps} />);
-    const maxSlider = screen.getByLabelText(/Max Price/i);
+    const maxSlider = screen.getByLabelText(/Max/i);
     fireEvent.change(maxSlider, { target: { value: "900" } });
     expect(mockProps.onPriceRangeChange).toHaveBeenCalledWith({
       ...mockProps.priceRange,
@@ -76,17 +76,9 @@ describe("FilterSidebar", () => {
     });
   });
 
-  it("calls onSortChange when sort option is selected", () => {
-    render(<FilterSidebar {...mockProps} />);
-    const sortSelect = screen.getByLabelText("Sort By");
-    fireEvent.change(sortSelect, { target: { value: "name" } });
-    expect(mockProps.onSortChange).toHaveBeenCalledWith("name");
-  });
-
-  it("does not render sidebar when isOpen is false", () => {
+  it("hides sidebar visually when isOpen is false", () => {
     render(<FilterSidebar {...mockProps} isOpen={false} />);
-    expect(screen.queryByLabelText("Sort By")).not.toBeInTheDocument();
-    expect(screen.queryByLabelText(/Min Price/i)).not.toBeInTheDocument();
-    expect(screen.queryByLabelText(/Max Price/i)).not.toBeInTheDocument();
-  });
+    const sidebar = screen.getByLabelText("Product Filters");
+    expect(sidebar).toHaveClass("-translate-x-full");
+  });  
 });

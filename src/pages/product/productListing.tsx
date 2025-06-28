@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/pages/ProductListing.tsx
+import React, { useState, useEffect, useMemo } from "react";
 import Header from "../../components/layout/Heder";
 import Footer from "../../components/layout/Footer";
 import Newsletter from "../home/components/Newsletter";
@@ -13,9 +14,7 @@ const ProductListing: React.FC = () => {
   const {
     loading,
     error,
-    products: allProducts,
-    currentPage,
-    setCurrentPage,
+    allProducts,
     categories,
     priceRange,
     setPriceRange,
@@ -27,73 +26,76 @@ const ProductListing: React.FC = () => {
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  // Handle responsive behavior
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
     };
-    
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Close sidebar when switching from mobile to desktop
   useEffect(() => {
-    if (!isMobile) {
-      setSidebarOpen(false);
-    }
-  }, [isMobile]);
-
-  const productsPerPage = 9;
-  const filteredProducts = allProducts.filter((product) => {
-    const matchesCategory =
-      selectedCategories.length === 0 ||
-      selectedCategories.includes(product.category);
-    const matchesSearch =
-      !search || product.title.toLowerCase().includes(search.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
-  const totalFilteredPages = Math.ceil(
-    filteredProducts.length / productsPerPage
-  );
-  const paginatedProducts = filteredProducts.slice(
-    (currentPage - 1) * productsPerPage,
-    currentPage * productsPerPage
-  );
-
-  React.useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategories, search, setCurrentPage]);
+  }, [selectedCategories, search, priceRange, sortBy]);
 
-  let productGridContent;
-  if (loading) {
-    productGridContent = (
-      <div className="flex justify-center items-center h-64">Loading...</div>
-    );
-  } else if (error) {
-    productGridContent = (
-      <div className="flex justify-center items-center h-64 text-red-500">
-        {error}
-      </div>
-    );
-  } else if (filteredProducts.length === 0) {
-    productGridContent = (
-      <div className="flex justify-center items-center h-64 text-gray-500">
-        No products found.
-      </div>
-    );
-  } else {
-    productGridContent = (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {paginatedProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    );
-  }
+  const filteredProducts = useMemo(() => {
+    const filtered = allProducts.filter((product) => {
+      const inCategory =
+        selectedCategories.length === 0 ||
+        selectedCategories.includes(product.category);
+      const inSearch =
+        !search || product.title.toLowerCase().includes(search.toLowerCase());
+      const inPriceRange =
+        product.price >= priceRange.min && product.price <= priceRange.max;
+
+      return inCategory && inSearch && inPriceRange;
+    });
+
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case "price-low":
+          return a.price - b.price;
+        case "price-high":
+          return b.price - a.price;
+        case "popularity":
+          return b.rating.count - a.rating.count;
+        case "rating":
+          return b.rating.rate - a.rating.rate;
+        default:
+          return a.title.localeCompare(b.title);
+      }
+    });
+
+    return filtered;
+  }, [allProducts, selectedCategories, priceRange, sortBy, search]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const paginatedFilteredProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const productGridContent = loading ? (
+    <div className="flex justify-center items-center h-64">Loading...</div>
+  ) : error ? (
+    <div className="flex justify-center items-center h-64 text-red-500">
+      {error}
+    </div>
+  ) : filteredProducts.length === 0 ? (
+    <div className="flex justify-center items-center h-64 text-gray-500">
+      No products found.
+    </div>
+  ) : (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {paginatedFilteredProducts.map((product) => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
 
   return (
     <div className="bg-white w-full min-h-screen flex flex-col">
@@ -203,7 +205,7 @@ const ProductListing: React.FC = () => {
           {productGridContent}
           <Pagination
             currentPage={currentPage}
-            totalPages={totalFilteredPages}
+            totalPages={totalPages}
             onPageChange={setCurrentPage}
           />
         </section>

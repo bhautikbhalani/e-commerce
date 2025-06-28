@@ -7,17 +7,18 @@ import Newsletter from "../pages/home/components/Newsletter";
 import { useProducts } from "../hooks/useProducts";
 import ProductCard from "../components/ProductCard";
 import useCart from "../context/useCart";
+import type { Product } from "../utils/types";
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { products } = useProducts();
+  const { allProducts } = useProducts();
   const { addToCart } = useCart();
 
-  const product = products.find((p) => p.id === Number(id));
-  const similarProducts = products.filter(
-    (p) => p.category === product?.category && p.id !== product?.id
-  );
+  const product = allProducts.find((p: Product) => p.id === Number(id));
+  const similarProducts = allProducts.filter(
+    (p: Product) => p.category === product?.category && p.id !== product?.id
+  );  
 
   const [quantity, setQuantity] = useState(1);
 
@@ -138,7 +139,7 @@ const ProductDetailPage: React.FC = () => {
               You might also like
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-              {similarProducts.slice(0, 4).map((p) => (
+              {similarProducts.slice(0, 4).map((p: Product) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>

@@ -8,14 +8,16 @@ import "swiper/css/navigation";
 import "swiper/css/autoplay";
 
 const FeaturedProducts = () => {
-  const { products } = useProducts();
+  const { allProducts } = useProducts();
   const [activeTab, setActiveTab] = useState<"featured" | "latest">("featured");
 
-  const featuredProducts = [...products]
+  const featuredProducts = [...allProducts]
     .sort((a, b) => b.rating.rate - a.rating.rate)
     .slice(0, 8);
 
-  const latestProducts = [...products].sort((a, b) => b.id - a.id).slice(0, 8);
+  const latestProducts = [...allProducts]
+    .sort((a, b) => b.id - a.id)
+    .slice(0, 8);
 
   const displayProducts =
     activeTab === "featured" ? featuredProducts : latestProducts;
