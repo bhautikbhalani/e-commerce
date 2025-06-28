@@ -20,7 +20,7 @@ const CartModal: React.FC<CartModalProps> = ({
                 <div className="p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h2 className="text-2xl font-bold text-gray-800">Shopping Cart</h2>
-                        <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full">
+                        <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full cursor-pointer">
                             <X className="w-6 h-6" />
                         </button>
                     </div>
@@ -46,20 +46,20 @@ const CartModal: React.FC<CartModalProps> = ({
                                                 onClick={() =>
                                                     onUpdateQuantity(item.id, Math.max(0, item.quantity - 1))
                                                 }
-                                                className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded"
+                                                className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded cursor-pointer"
                                             >
                                                 -
                                             </button>
                                             <span className="w-8 text-center">{item.quantity}</span>
                                             <button
                                                 onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
-                                                className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded"
+                                                className="w-8 h-8 flex items-center justify-center bg-gray-200 rounded cursor-pointer"
                                             >
                                                 +
                                             </button>
                                             <button
                                                 onClick={() => onRemoveItem(item.id)}
-                                                className="ml-2 text-red-500 hover:text-red-700"
+                                                className="ml-2 text-red-500 hover:text-red-700 cursor-pointer"
                                             >
                                                 <X className="w-5 h-5" />
                                             </button>
@@ -72,7 +72,7 @@ const CartModal: React.FC<CartModalProps> = ({
                                 <div className="flex justify-between items-center text-xl font-bold mb-4">
                                     <span>Total: ${total.toFixed(2)}</span>
                                 </div>
-                                <button className="w-full bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition-colors duration-200">
+                                <button className="w-full bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition-colors duration-200 cursor-pointer">
                                     Proceed to Checkout
                                 </button>
                             </div>

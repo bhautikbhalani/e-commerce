@@ -22,36 +22,38 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     return (
-        <div className="flex justify-center items-center gap-2 mt-8">
+        <nav className="flex justify-center items-center gap-2 mt-10" aria-label="Pagination Navigation">
             <button
                 onClick={() => onPageChange(currentPage - 1)}
                 disabled={currentPage === 1}
-                className="px-3 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                className="w-10 h-10 px-0 py-0 rounded-full border border-primary-200 bg-white text-primary-600 hover:bg-primary-50 focus:ring-2 focus:ring-primary-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                aria-label="Previous Page"
             >
-                Previous
+                &lt;
             </button>
-
             {pages.map((page) => (
                 <button
                     key={page}
                     onClick={() => onPageChange(page)}
-                    className={`px-3 py-2 border rounded-md ${currentPage === page
-                        ? 'bg-blue-600 text-white border-blue-600'
-                        : 'hover:bg-gray-50'
+                    className={`w-10 h-10 px-0 py-0 rounded-full border transition-colors duration-150 focus:ring-2 focus:ring-primary-300 flex items-center justify-center ${currentPage === page
+                        ? 'bg-black text-white border-black font-bold shadow'
+                        : 'bg-white text-primary-700 border-primary-200 hover:bg-primary-50'
                         }`}
+                    aria-current={currentPage === page ? 'page' : undefined}
+                    aria-label={`Page ${page}`}
                 >
                     {page}
                 </button>
             ))}
-
             <button
                 onClick={() => onPageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
-                className="px-3 py-2 border rounded-md disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                className="w-10 h-10 px-0 py-0 rounded-full border border-primary-200 bg-white text-primary-600 hover:bg-primary-50 focus:ring-2 focus:ring-primary-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                aria-label="Next Page"
             >
-                Next
+                &gt;
             </button>
-        </div>
+        </nav>
     );
 };
 

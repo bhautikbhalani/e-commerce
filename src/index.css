@@ -1,9 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-/* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* Custom Base Styles */
 @layer base {
   * {
     box-sizing: border-box;
@@ -32,24 +29,20 @@
     flex-direction: column;
   }
 
-  /* Improved focus styles for accessibility */
   *:focus {
     outline: 2px solid rgb(59 130 246);
     outline-offset: 2px;
   }
 
-  /* Remove focus outline for mouse users */
   *:focus:not(:focus-visible) {
     outline: none;
   }
 
-  /* Ensure focus is visible for keyboard users */
   *:focus-visible {
     outline: 2px solid rgb(59 130 246);
     outline-offset: 2px;
   }
 
-  /* Headings */
   h1,
   h2,
   h3,
@@ -75,7 +68,6 @@
     font-size: 1.5rem;
   }
 
-  /* Links */
   a {
     color: rgb(37 99 235);
     text-decoration: none;
@@ -86,7 +78,6 @@
     text-decoration: underline;
   }
 
-  /* Selection styles */
   ::selection {
     background-color: rgb(219 234 254);
     color: rgb(30 58 138);
@@ -98,7 +89,6 @@
   }
 }
 
-/* Custom animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -141,7 +131,6 @@
   }
 }
 
-/* Print styles */
 @media print {
   .no-print {
     display: none !important;
@@ -158,14 +147,12 @@
   }
 }
 
-/* High contrast mode */
 @media (prefers-contrast: high) {
   .card {
     border: 2px solid currentColor;
   }
 }
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -180,7 +167,6 @@
   }
 }
 
-/* Dark mode auto */
 @media (prefers-color-scheme: dark) {
   .dark-mode-auto {
     background-color: rgb(17 24 39);
