@@ -22,7 +22,7 @@ const ProductDetailPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
 
   if (!product)
-    return <div className="text-center p-10">Product not found</div>;
+    return <div className="text-center p-10 text-white">Product not found</div>;
 
   const handleAddToCart = () => {
     // Add product with quantity (either via loop or enhanced cart context)
